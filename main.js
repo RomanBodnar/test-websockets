@@ -1,5 +1,15 @@
 import { createBoard, playMove } from "./connect4.js";
 
+function getWebSocketServer() {
+    if (window.location.host === "python-websockets.github.io") {
+      return "wss://test-websockets-e4a3b327eda1.herokuapp.com/";
+    } else if (window.location.host === "localhost:8000") {
+      return "ws://localhost:8001/";
+    } else {
+      throw new Error(`Unsupported host: ${window.location.host}`);
+    }
+}
+
 function initGame(websocket) {
   websocket.addEventListener("open", () => {
     // Send an "init" event according to who is connecting.
@@ -70,16 +80,6 @@ function sendMoves(board, websocket) {
     websocket.send(JSON.stringify(event));
   });
 }
-
-function getWebSocketServer() {
-    if (window.location.host === "python-websockets.github.io") {
-      return "wss://test-websockets-e4a3b327eda1.herokuapp.com/";
-    } else if (window.location.host === "localhost:8000") {
-      return "ws://localhost:8001/";
-    } else {
-      throw new Error(`Unsupported host: ${window.location.host}`);
-    }
-  }
 
 window.addEventListener("DOMContentLoaded", () => {
   // Initialize the UI.
