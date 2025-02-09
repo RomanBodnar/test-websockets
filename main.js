@@ -1,7 +1,7 @@
 import { createBoard, playMove } from "./connect4.js";
 
 function getWebSocketServer() {
-    if (window.location.host === "python-websockets.github.io") {
+    if (window.location.host === "romanbodnar.github.io") {
       return "wss://test-websockets-e4a3b327eda1.herokuapp.com/";
     } else if (window.location.host === "localhost:8000") {
       return "ws://localhost:8001/";
